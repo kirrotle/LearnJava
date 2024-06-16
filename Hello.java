@@ -1,39 +1,18 @@
+import Test1.Inter;
+
 public class Hello {
     public static void main(String[] args) {
-        inter1 x = new inter1();
-        x.show();
+        impl x = new impl();
+        x.method();
     }
 }
 
-interface inter {
-    //接口可以允許普通的變數
-    public String val = "";
-    //這個會出錯,因為interface不允許方法有方法體
-//    public void method1(){
-//        System.out.println("123");
-//    }
-    //沒寫方法體就部會出錯了,且可以
-    public void method2();
-    //正常寫法
-    public abstract void show();
-    public abstract void method();
-}
+class impl implements Inter {
 
-class inter1 implements inter{
+    //如果沒寫method function會報錯,可以證明系統默認有加上abstract
+    //並且可以跨package使用只有可能是protect或是public
     @Override
-    public void show() {
-        System.out.println("show");
+    public void method() {
+        System.out.println("123");
     }
-
-    @Override
-    public void method() {}
-
-    //就算是沒有寫abstract還是要繼承
-    @Override
-    public void method2() {
-        //寫不出val
-        //super.val
-    }
-
 }
-
