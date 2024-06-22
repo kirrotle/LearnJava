@@ -1,18 +1,18 @@
-import Test1.Inter;
-
 public class Hello {
     public static void main(String[] args) {
-        impl x = new impl();
-        x.method();
+        final String x = "Hello World!";
     }
 }
 
-class impl implements Inter {
+interface  inter1{
+    void message1();
+}
 
-    //如果沒寫method function會報錯,可以證明系統默認有加上abstract
-    //並且可以跨package使用只有可能是protect或是public
-    @Override
-    public void method() {
-        System.out.println("123");
-    }
+interface  inter2{
+    void message2();
+}
+
+//需注意這邊是使用extends
+interface  inter3 extends inter1,inter2{
+    void message3();
 }
