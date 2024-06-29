@@ -10,4 +10,8 @@ public class InernalOrder implements OrderService {
     public void FindOne() {
         System.out.println("Internal Find One");
     }
+
+    public void Check(){
+        System.out.println("Check");
+    }
 }

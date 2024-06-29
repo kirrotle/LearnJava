@@ -1,36 +1,62 @@
 public class Hello {
     public static void main(String[] args) {
-        father x = new father();
-        //這邊調用都是使用父類的變數及功能
-        //雖然可以正常的使用靜態變數及方法,
-        //但是在編譯時會把實例化的名稱換成類名
-        //x.staticNum -> father.staticNum
-        //x.StaticShow() -> father.StaticShow()
-        System.out.println(x.staticNum);
-        x.StaticShow();
+        interA x = new interA();
+        x.method();
+        //interB就算沒覆寫method方法也有method方法
+        interB y = new interB();
+        y.method();
     }
 }
 
-class father{
-    public int num = 10;
-    public static int staticNum = 1;
-    public void show (){
-        System.out.println("father");
-    }
-    public static void StaticShow(){
-        System.out.println("static father");
+interface A{
+    public default void method (){
+        System.out.println("A method");
     }
 }
 
-class son extends father{
-    public int num = 20;
-    public static int staticNum = 2;
+interface inter{
+    void show();
+    void print();
+    //只要使用default就可以在interface中寫有方法體的方法
+    public default void method(){
+        System.out.println("inter method");
+    }
+}
+
+class interA implements inter,A{
     @Override
-    public void show (){
-        System.out.println("son");
+    public void show() {
+        System.out.println("interA show");
     }
-    public static void StaticShow(){
-        System.out.println("static son");
+
+    @Override
+    public void print() {
+        System.out.println("interA print");
+    }
+
+    //可以覆寫父類的method方法
+    @Override
+    public void method(){
+        //這邊須注意interA的父類有兩個
+        //一個是inter另一個是Object
+        //最直屬的是Object,但是Object沒有method方法所以會抱錯
+        //旁系的是inter,但是得透過inter.super才可以呼叫到inter的方法
+        //super.method();
+        inter.super.method();
+        System.out.println("interA method");
     }
 }
 
+//這邊就會出錯了,因為interB同時繼承inter跟A interface的方法
+//編譯器不知道要用那哪一個
+class interB implements inter,A{
+    @Override
+    public void show() {
+        System.out.println("interB show");
+    }
+
+    @Override
+    public void print() {
+        System.out.println("interB print");
+    }
+}
