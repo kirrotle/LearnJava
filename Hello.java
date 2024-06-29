@@ -1,30 +1,12 @@
-public class Hello {
-    public static void main(String[] args) {
-        //因為interface的方法都有方法體所以可以直接使用
-        inter x = new inter() {};
-        x.start();
-
-        inter.StaticStart();
-    }
-}
-
-
-interface inter{
-    public default void start(){
-        log();
-        System.out.println("start");
-    }
-    private void log(){
-        System.out.println("write log");
-    }
-
-    public static void StaticStart(){
-        StaticLog();
-        System.out.println("StaticStart");
-    }
-
-    //也可以將static變成private
-    private static void StaticLog(){
-        System.out.println("write log");
+public class Hello {//這個是Class Block
+    public static void main(String[] args) {//這個是Method Block
+        {//這個是Local Block
+            int x = 10;
+            System.out.println(x);
+        }
+        //因上面的x出大括號之後被釋放了
+        //所以下面可以再宣告一個x
+        int x = 20;
+        System.out.println(x);
     }
 }
