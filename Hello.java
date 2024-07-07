@@ -1,39 +1,36 @@
 public class Hello {
     public static void main(String[] args) {
-        //需記住不是Outer.Inner x = new Outer.Inner();
-        //需要先有外部的Outer,才可以創建內部的Inner
-        Outer.Inner x = new Outer().new Inner();
+        //需注意到這邊不用new Outer().new Inner()了
+        //因為Inner是static
+        Outer.Inner x = new Outer.Inner();
+        x.method();
+
+        //如果內部方法也是static可以直接使用
+        Outer.Inner.method1();
     }
 }
 
 class Outer {
 
-    public Outer(){
-        Inner x = new Inner();
-        x.method();
-    }
-
-    private void method(){
+    public void method(){
         System.out.println("Outer method");
     }
 
-    class Inner {
+    static class Inner {
 
-        private void method(){
+        public void method(){
             System.out.println("Inner method");
+            //會無法使用,因為Inner是static無法讀取非static的class
+            //Outer.this.method();
+            //所以要先new之後才可以使用
+            Outer x = new Outer();
+            x.method();
         }
 
-         public Inner(){
-             System.out.println("我是內部類");
-             //當沒有Inner.method的方法可以直接呼叫到Outer.method
-             method();
-             //當內部也有一個method時就得這樣使用
-             //因為嚴格來說也是自己本類的成員
-             //感覺需要想的是this.num其實是Inner.this.num
-             //所以
-             Inner.this.method();
-             Outer.this.method();
+        public static void method1(){
+            System.out.println("Inner static method");
         }
     }
+
 }
 
