@@ -1,23 +1,23 @@
+import java.util.Random;
+
 public class Hello {
     public static void main(String[] args) {
-
-        //因為這邊只有一個方法所以知道這個方法是for method function的
-        UseInter(() ->{
-            System.out.println("123");
+        //這個是沒有省略的寫法
+        UseInter((String msg) -> {
+            return msg;
         });
 
-        //Inter1使用Lambda表達式就會出錯因為不知道是給method還是method1
-//        UseInter1(() ->{
-//            System.out.println("123");
-//        });
+        //省略的寫法
+        //可以省略參數型別
+        //因只有一個參數,所以()省略
+        //因方法體只有一行所以可以省略{}跟結尾的;
+        //因這個function有回傳值,且因為上面的條件省略{},return也可以省略不寫
+        UseInter(msg -> msg + "省略的寫法");
+
     }
 
-    public  static  void UseInter(inter i){
-        i.method();
-    }
-
-    public  static  void UseInter1(inter1 i){
-        i.method();
+    public static void UseInter(inter i){
+        System.out.println(i.ShowMsg("123"));
     }
 
 }
@@ -26,21 +26,5 @@ public class Hello {
 //就可以被稱為函數式編程接口
 @FunctionalInterface
 interface inter{
-    void method();
-}
-
-//會發現語法糖報錯,因為這邊無法同時擁有兩個方法
-//@FunctionalInterface
-interface inter1{
-    void method();
-    void method1();
-}
-
-class test implements inter{
-
-    @Override
-    public void method() {
-        System.out.println("test implement inter");
-    }
-
+    String ShowMsg(String msg);
 }
