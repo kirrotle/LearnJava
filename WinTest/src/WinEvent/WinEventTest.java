@@ -9,20 +9,21 @@ public class WinEventTest {
     public static void main(String[] args) {
         JFrame frame = new JFrame("WinEventTest");
 
-//        JButton button = new JButton("Click Me");
-//        button.setBounds(0, 0, 100, 100);
-//        //可以這樣子綁定事件(簡單)
-//        button.addActionListener((e) -> {
-//            ClickMe();
-//        });
-//        //或是這樣子(複雜,但比較正規)
-//        button.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("OnClick Trigger");
-//            }
-//        });
-//        frame.add(button);
+        JButton button = new JButton("Click Me");
+        button.setBounds(0, 0, 100, 100);
+        button.setFocusable(false);
+        //可以這樣子綁定事件(簡單)
+        button.addActionListener((e) -> {
+            ClickMe();
+        });
+        //或是這樣子(複雜,但比較正規)
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("OnClick Trigger");
+            }
+        });
+        frame.add(button);
 
         //增加鍵盤事件
         //鍵盤需有更多的事件處理,所以寫成一個class會比較好
