@@ -40,17 +40,24 @@ public class WinEventTest {
     }
 }
 
-class KeyEvent implements KeyListener {
-
+abstract class KeyListenerAdapter implements KeyListener {
     @Override
     public void keyTyped(java.awt.event.KeyEvent e) {
-//        System.out.println("keyTyped");
+
     }
 
     @Override
     public void keyPressed(java.awt.event.KeyEvent e) {
-//        System.out.println("keyPressed");
+
     }
+
+    @Override
+    public void keyReleased(java.awt.event.KeyEvent e) {
+
+    }
+}
+
+class KeyEvent extends KeyListenerAdapter {
 
     @Override
     public void keyReleased(java.awt.event.KeyEvent e) {
@@ -72,4 +79,5 @@ class KeyEvent implements KeyListener {
                 break;
         }
     }
+
 }
